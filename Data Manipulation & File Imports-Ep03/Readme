@@ -1,0 +1,29 @@
+Data Manipulation & File Imports
+
+📌 What You Will Learn
+
+DDL vs DML — the full SQL command category map
+
+INSERT — adding single rows, multiple rows, FK insert order
+
+UPDATE — modifying data safely with WHERE
+
+DELETE — removing rows, FK deletion order
+
+ALTER TABLE — add, modify, rename, drop columns
+
+CSV Import — bulk loading data via Workbench and LOAD DATA
+
+Files in This Folder
+Order| File | What's Inside |
+
+1 |ep03_ddl_vs_dml.sql | Full SQL command category map with explanations |
+2 |ep03_insert.sql | INSERT single row, multiple rows, FK order rule |
+3 |ep03_update.sql |UPDATE with WHERE, multiple columns, calculations |
+4 |ep03_delete.sql |DELETE with WHERE, FK deletion order, vs TRUNCATE |
+5 |ep03_alter_table.sql |ADD, MODIFY, RENAME, DROP columns and constraints |
+6 |ep03_csv_import.sql |Import CSV via Workbench Wizard and LOAD DATA |
+
+✅ Run files in the order listed above
+
+
