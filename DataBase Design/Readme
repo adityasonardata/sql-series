@@ -1,0 +1,100 @@
+📌 What You Will Learn
+
+What data types are and which one to use
+What a Primary Key is and why every table needs one
+What a Foreign Key is and how tables link together
+Constraints — NOT NULL, UNIQUE, DEFAULT, CHECK
+How to write CREATE TABLE in MySQL step by step
+How to verify tables using DESCRIBE and SHOW TABLES
+
+
+📂 Files in This Folder
+OrderFileWhat's Inside1ep02_create_database.sqlCreate store_db and verify it2ep02_data_types_reference.sqlAll data types with examples and demos3ep02_create_tables.sqlFull CREATE TABLE for customers, products, orders4ep02_constraints.sqlAll 6 constraints with live examples
+
+✅ Run files in the order listed above
+
+
+🗃️ Database Schema Built in This Episode
+store_db
+│
+├── customers
+│   ├── customer_id   INT            PK, AUTO_INCREMENT
+│   ├── first_name    VARCHAR(50)    NOT NULL
+│   ├── last_name     VARCHAR(50)    NOT NULL
+│   ├── email         VARCHAR(100)   UNIQUE, NOT NULL
+│   ├── phone         VARCHAR(20)
+│   ├── city          VARCHAR(50)
+│   └── created_at    DATE           DEFAULT CURRENT_DATE
+│
+├── products
+│   ├── product_id    INT            PK, AUTO_INCREMENT
+│   ├── product_name  VARCHAR(100)   NOT NULL
+│   ├── category      VARCHAR(50)
+│   ├── price         DECIMAL(10,2)  NOT NULL, CHECK > 0
+│   └── stock         INT            DEFAULT 0
+│
+└── orders
+    ├── order_id      INT            PK, AUTO_INCREMENT
+    ├── customer_id   INT            FK → customers.customer_id
+    ├── product_id    INT            FK → products.product_id
+    ├── quantity      INT            NOT NULL, CHECK > 0
+    ├── order_date    DATE           DEFAULT CURRENT_DATE
+    └── status        VARCHAR(20)    DEFAULT 'Pending'
+
+📝 Concepts Covered
+Data Types
+TypeUse ForExampleINTWhole numbers, IDs, counts1, 25, 1000DECIMAL(p,s)Prices, salaries with decimals75000.00VARCHAR(n)Names, emails, variable text'Rahul Sharma'CHAR(n)Fixed codes like country codes'IN', 'US'DATEDates only'2024-01-15'DATETIMEDate + time together'2024-01-15 10:30:00'BOOLEANTrue/False flagsTRUE, FALSE
+
+Primary Key vs Foreign Key
+Primary KeyForeign KeyPurposeUniquely identifies each rowLinks to another table's PKDuplicates❌ Not allowed✅ AllowedNULL❌ Not allowed❌ Not allowedPer tableOnly one PKCan have many FKsKeywordPRIMARY KEYFOREIGN KEY ... REFERENCES
+
+Constraints
+ConstraintWhat It DoesExampleNOT NULLColumn must always have a valuefirst_name VARCHAR(50) NOT NULLUNIQUEAll values must be differentemail VARCHAR(100) UNIQUEDEFAULTAuto-fills value if none givenstatus VARCHAR(20) DEFAULT 'Pending'CHECKOnly allows values meeting conditionprice DECIMAL CHECK (price > 0)PRIMARY KEYNOT NULL + UNIQUE combinedPRIMARY KEY (customer_id)FOREIGN KEYLinks to PK of another tableFOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+
+💻 Full Schema — Quick Copy
+sqlCREATE DATABASE store_db;
+USE store_db;
+
+CREATE TABLE customers (
+    customer_id  INT           AUTO_INCREMENT,
+    first_name   VARCHAR(50)   NOT NULL,
+    last_name    VARCHAR(50)   NOT NULL,
+    email        VARCHAR(100)  NOT NULL UNIQUE,
+    phone        VARCHAR(20),
+    city         VARCHAR(50),
+    created_at   DATE          DEFAULT (CURRENT_DATE),
+    PRIMARY KEY  (customer_id)
+);
+
+CREATE TABLE products (
+    product_id   INT            AUTO_INCREMENT,
+    product_name VARCHAR(100)   NOT NULL,
+    category     VARCHAR(50),
+    price        DECIMAL(10, 2) NOT NULL CHECK (price > 0),
+    stock        INT            DEFAULT 0,
+    PRIMARY KEY  (product_id)
+);
+
+CREATE TABLE orders (
+    order_id     INT          AUTO_INCREMENT,
+    customer_id  INT          NOT NULL,
+    product_id   INT          NOT NULL,
+    quantity     INT          NOT NULL CHECK (quantity > 0),
+    order_date   DATE         DEFAULT (CURRENT_DATE),
+    status       VARCHAR(20)  DEFAULT 'Pending',
+    PRIMARY KEY  (order_id),
+    FOREIGN KEY  (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY  (product_id)  REFERENCES products(product_id)
+);
+
+✅ Verify Your Tables
+sql-- See all tables created
+SHOW TABLES;
+
+-- Check structure of each table
+DESCRIBE customers;
+DESCRIBE products;
+DESCRIBE orders;
+
+⚠️ Common Mistakes to Avoid
+MistakeWhy It's a ProblemFixStoring price as VARCHARCan't do math on itUse DECIMAL(10,2)No NOT NULL on important columnsAllows empty data inAdd NOT NULLForgetting PRIMARY KEYNo way to uniquely identify rowsAlways add PKInserting orders before customersFK will throw an errorInsert in correct orderNo CHECK on priceAllows negative pricesAdd CHECK (price > 0)
