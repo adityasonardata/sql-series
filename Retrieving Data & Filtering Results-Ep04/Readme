@@ -1,0 +1,91 @@
+Ep.04 — Retrieving Data & Filtering Results
+
+📺 Watch this episode: [YouTube Link]
+⬅️ Previous: [Ep.03 — Data Manipulation] ( https://youtu.be/H5AnKGSS1Vc?si=N7TapB_zWRhJqO-7 )
+
+
+## 📌 What You Will Learn
+
+- SELECT — fetch specific columns from a table
+- Column aliases — rename output columns cleanly
+- ORDER BY — sort results ascending or descending
+- LIMIT & OFFSET — control how many rows you get
+- WHERE — filter rows by condition
+- Comparison operators — =, !=, >, <, >=, <=
+- AND, OR, NOT — combine multiple conditions
+- BETWEEN — range filter (inclusive)
+- IN — match against a list of values
+- LIKE — pattern matching with % and _
+- IS NULL / IS NOT NULL — handle missing values
+- DISTINCT — remove duplicate values from output
+
+---
+
+## 📂 Files in This Folder
+
+| Order | File | What's Inside |
+|---|---|---|
+| 1 | `ep04_select_basics.sql` | SELECT, aliases, ORDER BY, LIMIT, OFFSET |
+| 2 | `ep04_where_clause.sql` | WHERE, comparison operators, AND, OR, NOT |
+| 3 | `ep04_sql_operators.sql` | BETWEEN, IN, LIKE, IS NULL, DISTINCT + combined examples |
+
+> ✅ Run files in the order listed above
+
+## 📝 Quick Reference
+
+### SELECT Syntax
+```sql
+SELECT column1, column2
+FROM   table_name
+WHERE  condition
+ORDER BY column ASC|DESC
+LIMIT  n;
+```
+
+### Operators Cheat Sheet
+
+| Operator | Use For | Example |
+|---|---|---|
+| `=` | Exact match | `WHERE city = 'Mumbai'` |
+| `!=` or `<>` | Not equal | `WHERE status != 'Cancelled'` |
+| `>` `<` `>=` `<=` | Comparison | `WHERE price >= 50000` |
+| `AND` | Both must be true | `WHERE city = 'Pune' AND price < 10000` |
+| `OR` | Either must be true | `WHERE city = 'Pune' OR city = 'Mumbai'` |
+| `NOT` | Reverse condition | `WHERE NOT status = 'Delivered'` |
+| `BETWEEN` | Range (inclusive) | `WHERE price BETWEEN 5000 AND 50000` |
+| `IN` | Match from list | `WHERE city IN ('Mumbai', 'Pune')` |
+| `LIKE` | Pattern match | `WHERE name LIKE 'R%'` |
+| `IS NULL` | No value | `WHERE city IS NULL` |
+| `IS NOT NULL` | Has value | `WHERE city IS NOT NULL` |
+| `DISTINCT` | Remove duplicates | `SELECT DISTINCT city` |
+
+### LIKE Wildcards
+| Pattern | Matches |
+|---|---|
+| `'R%'` | Starts with R |
+| `'%a'` | Ends with a |
+| `'%an%'` | Contains 'an' anywhere |
+| `'_____'` | Exactly 5 characters |
+| `'_a%'` | Second character is 'a' |
+
+---
+
+## ⚠️ Things to Remember
+
+| Mistake | Fix |
+|---|---|
+| `WHERE city = NULL` | Use `WHERE city IS NULL` instead |
+| AND + OR without brackets | Always wrap OR conditions in `()` |
+| `SELECT *` in production | Always name specific columns |
+| Forgetting ORDER BY with LIMIT | Results are random without ORDER BY |
+
+---
+
+## 🔗 What's Next
+
+In **Ep.05** we dive into aggregate functions:
+- `COUNT`, `SUM`, `AVG`, `MAX`, `MIN`
+- `GROUP BY` — group rows and aggregate per group
+- `HAVING` — filter grouped results
+
+➡️ [Go to Ep.05 →](../ep05_aggregation/)
