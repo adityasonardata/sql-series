@@ -1,11 +1,5 @@
--- ================================================
--- SQL for Data Analysts — Zero to Advanced
--- Episode 05 | Aggregation and Grouping Data
+
 -- Topic: Aggregate Functions — COUNT, SUM, AVG, MAX, MIN
--- ================================================
--- YouTube : [YOUR CHANNEL LINK]
--- GitHub  : [YOUR REPO LINK]
--- ================================================
 
 USE store_db;
 
