@@ -1,0 +1,96 @@
+Aggregation and Grouping Data
+
+> 📺 Watch this episode: [YouTube Link]
+
+ 📌 What You Will Learn
+
+- COUNT — count rows and non-null values
+- SUM — add up numeric column values
+- AVG — calculate average (with ROUND)
+- MAX & MIN — highest and lowest values
+- GROUP BY — aggregate results per group
+- HAVING — filter groups after aggregation
+- WHERE vs HAVING — when to use which
+
+📂 Files in This Folder
+
+| Order | File | What's Inside |
+|---|---|---|
+| 1 | `ep05_aggregate_functions.sql` | COUNT, SUM, AVG, MAX, MIN with real examples |
+| 2 | `ep05_group_by.sql` | GROUP BY single and multiple columns |
+| 3 | `ep05_having_clause.sql` | HAVING, WHERE+GROUP BY+HAVING, real analyst queries |
+
+> ✅ Run files in the order listed above
+
+## 📝 Quick Reference
+
+### Aggregate Functions
+
+| Function | What It Does | Example |
+|---|---|---|
+| `COUNT(*)` | Count all rows | `SELECT COUNT(*) FROM orders` |
+| `COUNT(col)` | Count non-null values | `SELECT COUNT(phone) FROM customers` |
+| `SUM(col)` | Add up values | `SELECT SUM(quantity) FROM orders` |
+| `AVG(col)` | Calculate average | `SELECT AVG(price) FROM products` |
+| `MAX(col)` | Highest value | `SELECT MAX(price) FROM products` |
+| `MIN(col)` | Lowest value | `SELECT MIN(price) FROM products` |
+
+### GROUP BY Syntax
+
+```sql
+SELECT   column, AGGREGATE(col)
+FROM     table
+WHERE    condition          -- filter rows first
+GROUP BY column             -- then group
+ORDER BY AGGREGATE(col) DESC;
+```
+
+### HAVING Syntax
+
+```sql
+SELECT   column, COUNT(*) AS total
+FROM     table
+GROUP BY column
+HAVING   COUNT(*) > 5      -- filter groups after
+ORDER BY total DESC;
+
+### WHERE vs HAVING
+
+| | WHERE | HAVING |
+|---|---|---|
+| Filters | Individual rows | Groups |
+| Runs | Before GROUP BY | After GROUP BY |
+| Works with | Any column | Aggregate functions |
+| Example | `WHERE price > 1000` | `HAVING COUNT(*) > 5` |
+
+---
+
+### SQL Execution Order
+
+```
+1. FROM      → identify the table
+2. WHERE     → filter rows
+3. GROUP BY  → group filtered rows
+4. HAVING    → filter groups
+5. SELECT    → return columns
+6. ORDER BY  → sort final result
+7. LIMIT     → restrict row count
+```
+
+## ⚠️ Common Mistakes
+
+| Mistake | Fix |
+|---|---|
+| Using WHERE to filter aggregates | Use HAVING instead |
+| Selecting a column not in GROUP BY | Add it to GROUP BY or wrap in aggregate |
+| Forgetting ROUND on AVG | `ROUND(AVG(price), 2)` |
+| Using HAVING without GROUP BY | HAVING needs GROUP BY to work |
+
+---
+
+## 🔗 What's Next
+
+In **Ep.06** we cover SQL built-in functions:
+- String functions — UPPER, LOWER, LENGTH, CONCAT, TRIM
+- Date functions — NOW, CURDATE, DATEDIFF, EXTRACT, DATE_FORMAT
+
