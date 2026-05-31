@@ -1,11 +1,6 @@
--- ================================================
--- SQL for Data Analysts — Zero to Advanced
--- Episode 05 | Aggregation and Grouping Data
+
 -- Topic: HAVING Clause
--- ================================================
--- YouTube : [YOUR CHANNEL LINK]
--- GitHub  : [YOUR REPO LINK]
--- ================================================
+
 
 USE store_db;
 
